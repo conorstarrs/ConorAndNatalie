@@ -19,6 +19,7 @@ class PeopleController < ApplicationController
 
     if @person.save
       render json: @person, status: :created, location: @person
+      RsvpMailer.email(@person.id).deliver_now
     else
       render json: @person.errors, status: :unprocessable_entity
     end
@@ -48,4 +49,11 @@ class PeopleController < ApplicationController
     def person_params
       params.require(:person).permit(:firstname, :lastname, :attending, :bus)
     end
+
+  protected
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      User.find_by(auth_token: token)
+    end
+  end
 end

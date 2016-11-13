@@ -12,6 +12,31 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  config.action_mailer.perform_deliveries = true
+
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #  address:              'mail.conorandnatalie.com',
+  #  port:                 25,
+  #  domain:               'conorandnatalie.com',
+  #  user_name:            'rsvp@conorandnatalie.com',
+  #  password:             'hacienda',
+  #  authentication:       'plain',
+  #  enable_starttls_auto: 'true',
+  #  openssl_verify_mode:  'none'  
+  #}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'conornataliersvp',
+    password:             'hacienda',
+    authentication:       'plain',
+    enable_starttls_auto: 'true' 
+  }
+
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
